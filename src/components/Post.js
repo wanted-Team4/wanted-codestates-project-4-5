@@ -1,12 +1,31 @@
 import styled from "styled-components";
-import Post from "../components/Post";
-
 
 const MainContainer = styled.main`
-    margin: 4em 1em;
+    width: 19vh;
+    height: 33vh;
+    border: 1px solid #9D9D9D;
+    box-shadow: 6px 6px 8px 0px rgba(217, 217, 217, 1);
 `;
 
-const SearchResult = () => {
+const ProductImage = styled.img`
+    width: 100%;
+    height: 25vh;
+`;
+
+const ProductName = styled.p`
+    font-size: 0.9em;
+    margin: 0.6em;
+`;
+
+const ProductPrice = styled.p`
+    font-size: 1em;
+    float: right;
+    color: #8A39E1;
+    margin-right: 0.5em;
+    margin-top: 0em;
+`;
+
+const Post = () => {
     const dummy = [
         {
             product_code: 1,
@@ -77,9 +96,11 @@ const SearchResult = () => {
 
     return (
         <MainContainer>
-            <Post />
+            <ProductImage src={dummy[0].image_url} alt="제품 이미지" />
+            <ProductName>{dummy[0].name}</ProductName>
+            <ProductPrice>{`₩${dummy[0].price}`}</ProductPrice>
         </MainContainer>
     );
 };
 
-export default SearchResult;
+export default Post;
