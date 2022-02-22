@@ -4,6 +4,7 @@ import React from "react";
 import Index from "./pages/index";
 import Question1 from "./pages/Question1";
 import Question2 from "./pages/Question2";
+import styled from "styled-components";
 
 const App = () => {
   return (
