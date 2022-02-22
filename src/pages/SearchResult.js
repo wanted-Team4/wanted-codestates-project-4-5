@@ -1,13 +1,35 @@
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Post from "../components/Post";
+import Nav from "../components/Nav";
+import axios from 'axios';
 
-
-const MainContainer = styled.main`
-    margin: 4em 1em;
+const MainContainer = styled.div`
+    margin: 0 3em;
+    width:100%;
+    display:flex;
+    justify-content:left;
+    flex-wrap: wrap;
 `;
 
 const SearchResult = () => {
-    const dummy = [
+    const [productResults, setProductResults] = useState([]);
+    const [regionResults, setRegionResults] = useState([]);
+    // const [filteredData, setFilteredData] = useState(keywordData);
+
+    useEffect(() => {
+        axios('https://static.pxl.ai/problem/data/products.json')
+            .then(response => {
+                console.log(response.data)
+                setProductResults(response.data);
+                // setFilteredData(response.data);
+            })
+            .catch(error => {
+                console.log('Error getting fake data: ' + error);
+            })
+    }, []);
+
+    const post = [
         {
             product_code: 1,
             name: "조끼_070",
@@ -73,13 +95,57 @@ const SearchResult = () => {
                 "c2.dresses",
                 ""
             ]
-        }]
+        },
+        {
+            product_code: 7,
+            name: "조끼_064",
+            image_url: "https://static.pxl.ai/problem/images/VT-064.jpg",
+            price: 33901,
+            category_names: [
+                "c1.tops",
+                "c2.outwears",
+                "c3.vests"
+            ]
+        },
+        {
+            product_code: 8,
+            name: "원피스_025",
+            image_url: "https://static.pxl.ai/problem/images/OP-025.jpg",
+            price: 18965,
+            category_names: [
+                "c1.onepiece",
+                "c2.dresses",
+                ""
+            ]
+        },
+        {
+            product_code: 9,
+            name: "원피스_025",
+            image_url: "https://static.pxl.ai/problem/images/OP-025.jpg",
+            price: 18965,
+            category_names: [
+                "c1.onepiece",
+                "c2.dresses",
+                ""
+            ]
+        },
+    ]
+
 
     return (
-        <MainContainer>
-            <Post />
-        </MainContainer>
+        <>
+            <Nav />
+            <MainContainer>
+                {post.map((post) => (
+                    <Post
+                        key={post.product_code}
+                        post={post}
+                    />
+                ))}
+            </MainContainer>
+        </>
     );
 };
 
 export default SearchResult;
+

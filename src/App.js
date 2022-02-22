@@ -7,7 +7,7 @@ import Question2 from "./pages/Question2";
 import styled from "styled-components";
 import SearchResult from "./pages/SearchResult";
 import store from "./store/configure";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 
 
 
@@ -29,10 +29,6 @@ const App = () => {
   );
 };
 const MainContainer = styled.main`
-    width:100%;
-    height: 100vh;
-    display:flex;
-    justify-content: left;
-    /* align-items: center; */
+
 `;
 export default App;
