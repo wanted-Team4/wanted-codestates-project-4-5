@@ -15,23 +15,39 @@ const Canvas = styled.canvas`
 const ItemCanvas = () => {
   const [color, setColor] = useState('rgba(238, 75, 43, 0.2)');
   const [data,, setData] = useInput({x:0, y:0, width:0, height:0});
-  const canvasRef = useRef(null);
-  let ctx = useRef(null);
-  let startXY = [0, 0];
+  
+  const [startXY, setStartXY] = useState([0, 0]);
   let endXY = [0, 0];
-  let painting = false;
+
+  const [painting, setPainting] = useState(false);
   const pixelData = useSelector((state) => state.Coordinate.coordinate);
   const dispatch = useDispatch();
 
+  const canvasRef = useRef(null);
+  let ctx = useRef(null);
+  if(canvasRef.current){
+    ctx = canvasRef.current.getContext('2d');
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.lineWidth = 2.5;
+  }
+  useEffect(() => {
+    if(painting)
+      ctx.beginPath();
+    if(!(data.width <= 30 || data.height <= 30))
+      dispatch(addCoordinateAction(data));
+  }, [data, painting]);
+
   const startPainting = ({ nativeEvent }) => {
-    painting = true;
-    startXY = [nativeEvent.offsetX, nativeEvent.offsetY];
+    setPainting(true);
+    setStartXY([nativeEvent.offsetX, nativeEvent.offsetY]);
   };
 
   const stopPainting = ({ nativeEvent }) => {
-    painting = false;
+    setPainting(false);
     endXY = [nativeEvent.offsetX, nativeEvent.offsetY];
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.closePath();
     setData({
       x: startXY[0], 
       y: startXY[1], 
@@ -44,27 +60,14 @@ const ItemCanvas = () => {
     const x = nativeEvent.offsetX;
     const y = nativeEvent.offsetY;
     
-    if (!ctx.canvas) return;
     if (!painting) {
-      ctx.beginPath();
+      return;
     } else {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
       ctx.fillRect(startXY[0], startXY[1], x-startXY[0], y-startXY[1]);
       ctx.stroke();
     }
   };
-
-  useEffect(() => {
-    // ...drawing using the ctx
-    ctx = canvasRef.current.getContext('2d');
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
-    ctx.lineWidth = 2.5;
-    
-    // if(data.x != 0 && data.y != 0) {
-    //   dispatch(addCoordinateAction(data));
-    // }
-  }, [canvasRef, data]);
 
   return (
     <>
@@ -75,7 +78,6 @@ const ItemCanvas = () => {
         onMouseMove={onMouseMove}
         onMouseDown={startPainting}
         onMouseUp={stopPainting}
-        onMouseLeave={stopPainting}
       >
       </Canvas>
       {pixelData.map((element, index) => 
