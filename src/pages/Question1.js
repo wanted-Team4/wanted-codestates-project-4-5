@@ -61,8 +61,6 @@ const Question1 = () => {
     const [regionData, setRegionData] = useState([]);
     //Keyword 검색 데이터
     const [productData, setProductData] = useState([]);
-    //검색 결과 데이터
-    const [searchData, setSearchData] = useState([]);
     const searchInput = useRef(null);
 
     //검색 함수
@@ -79,7 +77,6 @@ const Question1 = () => {
         //키워드 검색 (검색어가 한글일 경우)
         if (isKorean) {
             const foundResults = productData.filter((item) => item.name.split("_")[0] === value);
-            setSearchData(foundResults);
             dispatch(setPost(foundResults));
         }
         else {
@@ -88,8 +85,7 @@ const Question1 = () => {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.image_url === value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = regionData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
-                setSearchData([...matchedResult, { similarResults }]);
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
             }
             //product_code 검색
@@ -97,8 +93,7 @@ const Question1 = () => {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.product_code == value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = regionData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
-                setSearchData([...matchedResult, { similarResults }]);
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
             }
         }
