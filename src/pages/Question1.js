@@ -80,7 +80,7 @@ const Question1 = () => {
         if (isKorean) {
             const foundResults = productData.filter((item) => item.name.split("_")[0] === value);
             dispatch(setPost(foundResults));
-            navigate("/search")
+            navigate(`/search?=keyword=${value}`)
         }
         else {
             //image_url 검색
@@ -88,18 +88,18 @@ const Question1 = () => {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.image_url === value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2] );
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
-                navigate("/search")
+                navigate(`/search?=image_url=${value}`)
             }
             //product_code 검색
             else if (!isNaN(value)) {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.product_code == value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2] );
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
-                navigate("/search")
+                navigate(`/search?=product_code=${value}`)
             }
         }
     };
