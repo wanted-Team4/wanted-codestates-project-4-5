@@ -4,6 +4,7 @@ import ItemBox from "./ItemBox";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addCoordinateAction,
+  updateCoordinateAction,
   deleteCoordinateAction,
 } from "../actions/coordinate";
 import useInput from "../hooks/useInput";
@@ -45,12 +46,13 @@ const Bord = styled.div`
 const ItemCanvas = () => {
   const [color, setColor] = useState("rgba(238, 75, 43, 0.2)");
   const [data, , setData] = useInput({}); // Box생성 데이터
+  const [updateText, setUpdateText] = useState(""); //update text데이터
   const [startXY, setStartXY] = useState([0, 0]); // 그리기 시작 지점
   let endXY = [0, 0]; // 그리기 종료 지점
   const [painting, setPainting] = useState(false); // 그리기 여부 판단
   const pixelData = useSelector((state) => state.Coordinate.coordinate);
   const dispatch = useDispatch();
-
+  console.log(updateText, ">>");
   // canvas 도화지 선언
   const canvasRef = useRef(null);
   let ctx = useRef(null);
@@ -124,10 +126,14 @@ const ItemCanvas = () => {
       });
     }
   };
-  const onRemove = (type) => {
-    if (type === "Toggle") {
-      dispatch(deleteCoordinateAction());
-    }
+  const onRemove = (id) => {
+    dispatch(deleteCoordinateAction(id));
+  };
+
+  const onUpdate = (id) => {
+    setUpdateText(prompt("이름이 무엇인가요?"));
+    // console.log(id, ">>");
+    // dispatch(updateCoordinateAction({ id, text: updateText }));
   };
 
   return (
@@ -152,16 +158,17 @@ const ItemCanvas = () => {
         onMouseUp={stopPainting}
       ></Canvas>
       <Bord>
-        {pixelData.map((element) => {
-          return (
-            <ul key={element.id}>
-              <li>
+        <ul>
+          {pixelData.map((element) => {
+            return (
+              <li key={element.id}>
                 {element.text}
-                <button>x</button>
+                <button onClick={() => onRemove(element.id)}>x</button>
+                <button onClick={() => onUpdate(element.id)}>o</button>
               </li>
-            </ul>
-          );
-        })}
+            );
+          })}
+        </ul>
       </Bord>
     </Section>
   );
