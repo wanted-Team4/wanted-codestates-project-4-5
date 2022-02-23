@@ -8,6 +8,13 @@ export const addCoordinateAction = (data) => {
   };
 };
 
+export const updateCoordinateAction = (data) => {
+  return {
+    type: Constants.UPDATE_COORDINATE,
+    data,
+  };
+};
+
 export const deleteCoordinateAction = (data) => {
   return {
     type: Constants.DELETE_COORDINATE,

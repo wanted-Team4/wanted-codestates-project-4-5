@@ -7,10 +7,15 @@ const reducer = (state = coordinateDummy, action) => {
       return {
         coordinate: [...state.coordinate, action.data],
       };
+    case Constants.UPDATE_COORDINATE:
+      console.log(">>>", action);
+      return {
+        coordinate: [...state.coordinate, action.data],
+      };
     case Constants.DELETE_COORDINATE:
       return {
-        DeleteCoordinate: [
-          ...state.coordinated.filter((state) => state.id !== action.id),
+        coordinate: [
+          ...state.coordinate.filter((state) => state.id !== action.id),
         ],
       };
     default:
