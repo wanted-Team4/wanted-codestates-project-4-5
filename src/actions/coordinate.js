@@ -1,5 +1,5 @@
 import * as Constants from "../constants";
-export const SET_POST = 'SET_POST';
+export const SET_POST = "SET_POST";
 
 export const addCoordinateAction = (data) => {
   return {
@@ -8,9 +8,10 @@ export const addCoordinateAction = (data) => {
   };
 };
 
-export const deleteCoordinateAction = () => {
+export const deleteCoordinateAction = (data) => {
   return {
     type: Constants.DELETE_COORDINATE,
+    data,
   };
 };
 
