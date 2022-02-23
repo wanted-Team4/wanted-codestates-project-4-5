@@ -126,10 +126,8 @@ const ItemCanvas = () => {
       });
     }
   };
-  const onRemove = (type) => {
-    if (type === "Toggle") {
-      dispatch(deleteCoordinateAction());
-    }
+  const onRemove = (id) => {
+    dispatch(deleteCoordinateAction(id));
   };
 
   const onUpdate = (id) => {
@@ -160,17 +158,17 @@ const ItemCanvas = () => {
         onMouseUp={stopPainting}
       ></Canvas>
       <Bord>
-        {pixelData.map((element) => {
-          return (
-            <ul key={element.id}>
-              <li>
+        <ul>
+          {pixelData.map((element) => {
+            return (
+              <li key={element.id}>
                 {element.text}
-                <button>x</button>
+                <button onClick={() => onRemove(element.id)}>x</button>
                 <button onClick={() => onUpdate(element.id)}>o</button>
               </li>
-            </ul>
-          );
-        })}
+            );
+          })}
+        </ul>
       </Bord>
     </Section>
   );
