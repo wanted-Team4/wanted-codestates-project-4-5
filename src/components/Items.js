@@ -4,6 +4,83 @@ const Items = ({ item }) => {
   const { attributes, image_url, category_names } = item;
   const category = category_names[0].slice(3).toUpperCase();
 
+  const ItemsContainer = styled.div`
+    // 메인 아이템 스타일 코드
+    width: 19em;
+    height: 44em;
+    margin-right: 2em;
+    margin-top: 0.5em;
+    position: absolute;
+    box-shadow: 5px 5px 7px 0px rgba(217, 217, 217, 1);
+
+    @media screen and (max-width: 35rem) {
+      margin: 0 4em;
+    }
+    @media screen and (max-width: 30rem) {
+      margin: 0;
+    }
+  `;
+  const ItemsBoxOne = styled.div`
+    // items 1번쨰 박스 코드
+    position: relative;
+    border-bottom: 1px gray solid;
+    width: 100%;
+    height: 29em;
+  `;
+  const ItemsBoxImg = styled.img`
+    //items img 코드
+    width: 100%;
+    height: 24em;
+  `;
+  const ItemsSpan = styled.div`
+    // items span 코드
+    font-weight: bold;
+    margin: 0.8em;
+    font-size: 0.9em;
+  `;
+  const ItemsCategoryTitle = styled.div`
+    // items 카테고리 네임
+    width: 5em;
+    height: 1em;
+    margin-left: 0.5em;
+    color: white;
+    text-align: center;
+    padding: 0.2em;
+    background-color: #8a39e1;
+    font-size: 0.9em;
+  `;
+  const ItemsBoxTwo = styled.div`
+    // items 1번쨰 박스 코드
+    margin: 0;
+    width: 13em;
+    height: 10em;
+    padding: 0.5em;
+    box-sizing: border-box;
+  `;
+  const ItemsApiDiv = styled.div``;
+  const ItemsInnerBox = styled.div`
+    // item span 감싸줄 div
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+    flex-wrap: wrap;
+  `;
+  const ItemsValueOne = styled.div`
+    // item api 값들어갈 div
+    color: #d070fb;
+    display: flex;
+    font-weight: bold;
+    font-size: 1em;
+  `;
+  const ItemsNoValueOne = styled.div``;
+  const ItemsValueTwo = styled.div`
+    // item api 값들어갈 div
+    color: #d070fb;
+    font-weight: bold;
+    font-size: 1em;
+  `;
+  const ItemsNoValueTwo = styled.div``;
+
   return (
     <ItemsContainer>
       <ItemsBoxOne>
@@ -45,81 +122,5 @@ const Items = ({ item }) => {
     </ItemsContainer>
   );
 };
-const ItemsContainer = styled.div`
-  // 메인 아이템 스타일 코드
-  width: 19em;
-  height: 44em;
-  margin-right: 2em;
-  margin-top: 0.5em;
-  position: absolute;
-  box-shadow: 5px 5px 7px 0px rgba(217, 217, 217, 1);
-
-  @media screen and (max-width: 35rem) {
-    margin: 0 4em;
-  }
-  @media screen and (max-width: 30rem) {
-    margin: 0;
-  }
-`;
-const ItemsBoxOne = styled.div`
-  // items 1번쨰 박스 코드
-  position: relative;
-  border-bottom: 1px gray solid;
-  width: 100%;
-  height: 29em;
-`;
-const ItemsBoxImg = styled.img`
-  //items img 코드
-  width: 100%;
-  height: 24em;
-`;
-const ItemsSpan = styled.div`
-  // items span 코드
-  font-weight: bold;
-  margin: 0.8em;
-  font-size: 0.9em;
-`;
-const ItemsCategoryTitle = styled.div`
-  // items 카테고리 네임
-  width: 5em;
-  height: 1em;
-  margin-left: 0.5em;
-  color: white;
-  text-align: center;
-  padding: 0.2em;
-  background-color: #8a39e1;
-  font-size: 0.9em;
-`;
-const ItemsBoxTwo = styled.div`
-  // items 1번쨰 박스 코드
-  margin: 0;
-  width: 13em;
-  height: 10em;
-  padding: 0.5em;
-  box-sizing: border-box;
-`;
-const ItemsApiDiv = styled.div``;
-const ItemsInnerBox = styled.div`
-  // item span 감싸줄 div
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5em;
-  flex-wrap: wrap;
-`;
-const ItemsValueOne = styled.div`
-  // item api 값들어갈 div
-  color: #d070fb;
-  display: flex;
-  font-weight: bold;
-  font-size: 1em;
-`;
-const ItemsNoValueOne = styled.div``;
-const ItemsValueTwo = styled.div`
-  // item api 값들어갈 div
-  color: #d070fb;
-  font-weight: bold;
-  font-size: 1em;
-`;
-const ItemsNoValueTwo = styled.div``;
 
 export default Items;

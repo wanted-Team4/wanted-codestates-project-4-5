@@ -1,6 +1,6 @@
 # project
 
-작성 중 입니다.
+[과제 바로가기]
 
 ## 💡 Code Convention
 
@@ -15,7 +15,7 @@ $ npm install
 2️⃣ VScode prettier
 
 ```
-$ touch .prettierrc
+$ npx prettier --write .
 ```
 
 3️⃣ 실행
@@ -32,7 +32,7 @@ $ npm start
 | :sparkles: |      feat      |      새로운 기능 추가       |
 |   :bug:    |      fix       |          버그 수정          |
 | :recycle:  |    refactor    |        코드 리팩터링        |
-| :lipstick: |     style      |    문서 추가 및 업데이트    |
+| :lipstick: |     style      |   스타일 추가 및 업데이트   |
 | :package:  |     chore      |   패키지 추가 및 업데이트   |
 |  :books:   |      docs      | 그 외 문서 추가 및 업데이트 |
 
