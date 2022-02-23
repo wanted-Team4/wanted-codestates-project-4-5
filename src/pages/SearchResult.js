@@ -47,42 +47,42 @@ const Box = styled.div`
 `;
 
 const SearchResult = () => {
-  const posts = useSelector((state) => state.posts);
-  const item = posts[0];
-  const post = posts[1].similarResults;
+    const posts = useSelector((state) => state.posts);
+    const item = posts[0];
+    const post = posts[1].similarResults;
 
-  const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
-  return (
-    <>
-      {isLoading && <Loading />}
-      <Nav />
-      {posts[0].name ? (
-        <MainContainer>
-          {posts.map((post) => (
-            <Post
-              key={post.product_code}
-              post={post}
-              setLoading={setIsLoading}
-            />
-          ))}
-        </MainContainer>
-      ) : (
-        <Container>
-          <Items item={item} />
-          <Box>
-            {post.map((post) => (
-              <Post
-                key={post.product_code}
-                post={post}
-                setLoading={setIsLoading}
-              />
-            ))}
-          </Box>
-        </Container>
-      )}
-    </>
-  );
+    return (
+        <>
+            {isLoading && <Loading />}
+            <Nav />
+            {posts[0].name ? (
+                <MainContainer>
+                    {posts.map((post) => (
+                        <Post
+                            key={post.product_code}
+                            post={post}
+                            setLoading={setIsLoading}
+                        />
+                    ))}
+                </MainContainer>
+            ) : (
+                <Container>
+                    <Items item={item} />
+                    <Box>
+                        {post.map((post) => (
+                            <Post
+                                key={post.product_code}
+                                post={post}
+                                setLoading={setIsLoading}
+                            />
+                        ))}
+                    </Box>
+                </Container>
+            )}
+        </>
+    );
 };
 
 export default SearchResult;
