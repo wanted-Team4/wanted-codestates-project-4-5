@@ -44,8 +44,6 @@ const Link = styled.a`
 
 const Post = ({ post, setLoading }) => {
     const { image_url, name, price } = post
-
-
     const number = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
     return (
