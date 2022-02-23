@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const Items = ({ item }) => {
-  const { attributes, image_url, category_names } = item
-  const category = category_names[0].slice(3).toUpperCase()
+  const { attributes, image_url, category_names } = item;
+  const category = category_names[0].slice(3).toUpperCase();
 
   const Link = styled.a`
     text-decoration: none;
     color: black;
-    
-    :visited{
-        color: black;
+
+    :visited {
+      color: black;
     }
-`;
+  `;
 
   return (
     <Link href={image_url} target="_blank">
@@ -66,12 +66,12 @@ const ItemsContainer = styled.div`
   position: absolute;
   box-shadow: 5px 5px 7px 0px rgba(217, 217, 217, 1);
 
-    @media screen and (max-width: 35rem) {
-        margin: 0 4em;
-    }
-    @media screen and (max-width: 30rem) {
-        margin: 0;
-    }
+  @media screen and (max-width: 35rem) {
+    margin: 0 4em;
+  }
+  @media screen and (max-width: 30rem) {
+    margin: 0;
+  }
 `;
 const ItemsBoxOne = styled.div`
   // items 1번쨰 박스 코드
@@ -99,7 +99,7 @@ const ItemsCategoryTitle = styled.div`
   color: white;
   text-align: center;
   padding: 0.2em;
-  background-color: #8A39E1;
+  background-color: #8a39e1;
   font-size: 0.9em;
 `;
 const ItemsBoxTwo = styled.div`
