@@ -32,6 +32,15 @@ const ProductPrice = styled.p`
     margin-top: 0em;
 `;
 
+const Link = styled.a`
+    text-decoration: none;
+    color: black;
+    
+    :visited{
+        color: black;
+    }
+`;
+
 const Post = ({ post }) => {
     const { image_url, name, price } = post
 
@@ -39,9 +48,11 @@ const Post = ({ post }) => {
 
     return (
         <MainContainer>
-            <ProductImage src={image_url} alt="제품 이미지" />
-            <ProductName>{name}</ProductName>
-            <ProductPrice>{`₩ ${number}`}</ProductPrice>
+            <Link href={image_url} target="_blank">
+                <ProductImage src={image_url} alt="제품 이미지" />
+                <ProductName>{name}</ProductName>
+                <ProductPrice>{`₩ ${number}`}</ProductPrice>
+            </Link>
         </MainContainer>
     );
 };

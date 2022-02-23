@@ -6,8 +6,17 @@ const Items = ({ item }) => {
   const category = category_names[0].slice(3).toUpperCase()
   console.log(attributes[0].style)
 
+  const Link = styled.a`
+    text-decoration: none;
+    color: black;
+    
+    :visited{
+        color: black;
+    }
+`;
+
   return (
-    <div>
+    <Link href={image_url} target="_blank">
       <ItemsContainer>
         <ItemsBoxOne>
           <ItemsBoxImg src={image_url}></ItemsBoxImg>
@@ -16,38 +25,47 @@ const Items = ({ item }) => {
         </ItemsBoxOne>
         <ItemsSpan>ATTRIBUTES</ItemsSpan>
         <ItemsBoxTwo>
-          <ItemsApiDiv>
-            <ItemsValueOne>{`#${attributes[0].style}`}</ItemsValueOne>
-            <ItemsValueOne>{`#${attributes[1].season}`}</ItemsValueOne>
-            <ItemsValueOne>{`#${attributes[2].occasion}`}</ItemsValueOne>
-          </ItemsApiDiv>
-          <ItemsNoApiDiv>
-            <ItemsNoValueOne>style</ItemsNoValueOne>
-            <ItemsNoValueOne>season</ItemsNoValueOne>
-            <ItemsNoValueOne>occasion</ItemsNoValueOne>
-          </ItemsNoApiDiv>
-          <ItemsApiDiv>
-            <ItemsValueTwo>{`#${attributes[3].fabric}`}</ItemsValueTwo>
-            <ItemsValueTwo>{`#${attributes[4].sense}`}</ItemsValueTwo>
-            <ItemsValueTwo>{`#${attributes[5].pattern}`}</ItemsValueTwo>
-          </ItemsApiDiv>
-          <ItemsNoApiDiv>
-            <ItemsNoValueTwo>fabric</ItemsNoValueTwo>
-            <ItemsNoValueTwo>sense</ItemsNoValueTwo>
-            <ItemsNoValueTwo>pattern</ItemsNoValueTwo>
-          </ItemsNoApiDiv>
+          <ItemsInnerBox>
+            <ItemsApiDiv>
+              <ItemsValueOne>{`#${attributes[0].style}`}</ItemsValueOne>
+              <ItemsNoValueOne>style</ItemsNoValueOne>
+            </ItemsApiDiv>
+            <ItemsApiDiv>
+              <ItemsValueOne>{`#${attributes[1].season}`}</ItemsValueOne>
+              <ItemsNoValueOne>season</ItemsNoValueOne>
+            </ItemsApiDiv>
+            <ItemsApiDiv>
+              <ItemsValueOne>{`#${attributes[2].occasion}`}</ItemsValueOne>
+              <ItemsNoValueOne>occasion</ItemsNoValueOne>
+            </ItemsApiDiv>
+          </ItemsInnerBox>
+          <ItemsInnerBox>
+            <ItemsApiDiv>
+              <ItemsValueTwo>{`#${attributes[3].fabric}`}</ItemsValueTwo>
+              <ItemsNoValueTwo>fabric</ItemsNoValueTwo>
+            </ItemsApiDiv>
+            <ItemsApiDiv>
+              <ItemsValueTwo>{`#${attributes[4].sense}`}</ItemsValueTwo>
+              <ItemsNoValueTwo>sense</ItemsNoValueTwo>
+            </ItemsApiDiv>
+            <ItemsApiDiv>
+              <ItemsValueTwo>{`#${attributes[5].pattern}`}</ItemsValueTwo>
+              <ItemsNoValueTwo>pattern</ItemsNoValueTwo>
+            </ItemsApiDiv>
+          </ItemsInnerBox>
         </ItemsBoxTwo>
       </ItemsContainer>
-    </div>
+    </Link>
   );
 };
 const ItemsContainer = styled.div`
   // 메인 아이템 스타일 코드
-  width: 19vw;
+  width: 18vw;
   height: 46vw;
-  /* border: 1px solid black; */
   margin-right: 2em;
   margin-top: 0.5em;
+  position: absolute;
+  box-shadow: 5px 5px 7px 0px rgba(217, 217, 217, 1);
 `;
 const ItemsBoxOne = styled.div`
   // items 1번쨰 박스 코드
@@ -80,42 +98,39 @@ const ItemsCategoryTitle = styled.div`
 `;
 const ItemsBoxTwo = styled.div`
   // items 1번쨰 박스 코드
-  position: relative;
-
-  width: 23vw;
-  margin: 15px;
-  height: 50vw;
+  margin: 0;
+  width: 18vw;
+  height: 12vw;
+  padding: 1em;
+  box-sizing: border-box;
 `;
 const ItemsApiDiv = styled.div`
   // item span 감싸줄 div
-
-  padding: 20px 30px 10px 30px;
+`;
+const ItemsInnerBox = styled.div`
+  // item span 감싸줄 div
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
 `;
 const ItemsValueOne = styled.div`
   // item api 값들어갈 div
   color: #d070fb;
-  width: 6vw;
-  display: inline-block;
-`;
-const ItemsNoApiDiv = styled.div`
-  // item api 아닌 span 감싸는곳
-  padding: 20px 30px 10px 30px;
+  display: flex;
+  font-weight: bold;
+  font-size: 1.1em;
 `;
 const ItemsNoValueOne = styled.div`
   // item api 아닌값들어갈 div
-  width: 6vw;
-  display: inline-block;
 `;
 const ItemsValueTwo = styled.div`
   // item api 값들어갈 div
   color: #d070fb;
-  width: 8vw;
-  display: inline-block;
+  font-weight: bold;
+  font-size: 1.1em;
 `;
 const ItemsNoValueTwo = styled.div`
   // item api 아닌값들어갈 div
-  width: 8vw;
-  display: inline-block;
 `;
 
 export default Items;
