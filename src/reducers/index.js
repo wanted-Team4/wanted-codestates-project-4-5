@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
     }
   },
   Coordinate,
-  posts
+  posts,
 });
 
 export default rootReducer;
