@@ -54,10 +54,8 @@ const SearchResult = () => {
     const [ isLoading, setIsLoading ] = useState(true);
 
   return (
-    <>
-      {lodingAni === true ? (
         <>
-            {isLoading && <p>로딩중!!!!</p>}
+            {isLoading && <Loading />}
             <Nav />
             {posts[0].name ? (
                 <MainContainer>
@@ -83,10 +81,6 @@ const SearchResult = () => {
                 </Container>
             )}
         </>
-      ) : (
-        <Loading />
-      )}
-    </>
   );
 };
 
