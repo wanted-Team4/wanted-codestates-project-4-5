@@ -93,6 +93,7 @@ const Question1 = () => {
       );
       if (foundResults.length === 0) {
         alert("검색 결과가 없습니다.");
+        console.error("No data found.");
         return;
       }
       dispatch(setPost(foundResults));
@@ -106,6 +107,7 @@ const Question1 = () => {
         );
         if (matchedResult.length === 0) {
           alert("검색 결과가 없습니다.");
+          console.error("No data found.");
           return;
         }
         //검색어와 같은 카테고리의 아이템 목록
@@ -126,6 +128,7 @@ const Question1 = () => {
         );
         if (matchedResult.length === 0) {
           alert("검색 결과가 없습니다.");
+          console.error("No data found.");
           return;
         }
         //검색어와 같은 카테고리의 아이템 목록
