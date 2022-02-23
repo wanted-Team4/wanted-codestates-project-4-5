@@ -1,60 +1,48 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 
 const Items = ({ item }) => {
   const { attributes, image_url, category_names } = item;
   const category = category_names[0].slice(3).toUpperCase();
 
-  const Link = styled.a`
-    text-decoration: none;
-    color: black;
-
-    :visited {
-      color: black;
-    }
-  `;
-
   return (
-    <Link href={image_url} target="_blank">
-      <ItemsContainer>
-        <ItemsBoxOne>
-          <ItemsBoxImg src={image_url}></ItemsBoxImg>
-          <ItemsSpan>ITEMS</ItemsSpan>
-          <ItemsCategoryTitle>{category}</ItemsCategoryTitle>
-        </ItemsBoxOne>
-        <ItemsSpan>ATTRIBUTES</ItemsSpan>
-        <ItemsBoxTwo>
-          <ItemsInnerBox>
-            <ItemsApiDiv>
-              <ItemsValueOne>{`#${attributes[0].style}`}</ItemsValueOne>
-              <ItemsNoValueOne>style</ItemsNoValueOne>
-            </ItemsApiDiv>
-            <ItemsApiDiv>
-              <ItemsValueOne>{`#${attributes[1].season}`}</ItemsValueOne>
-              <ItemsNoValueOne>season</ItemsNoValueOne>
-            </ItemsApiDiv>
-            <ItemsApiDiv>
-              <ItemsValueOne>{`#${attributes[2].occasion}`}</ItemsValueOne>
-              <ItemsNoValueOne>occasion</ItemsNoValueOne>
-            </ItemsApiDiv>
-          </ItemsInnerBox>
-          <ItemsInnerBox>
-            <ItemsApiDiv>
-              <ItemsValueTwo>{`#${attributes[3].fabric}`}</ItemsValueTwo>
-              <ItemsNoValueTwo>fabric</ItemsNoValueTwo>
-            </ItemsApiDiv>
-            <ItemsApiDiv>
-              <ItemsValueTwo>{`#${attributes[4].sense}`}</ItemsValueTwo>
-              <ItemsNoValueTwo>sense</ItemsNoValueTwo>
-            </ItemsApiDiv>
-            <ItemsApiDiv>
-              <ItemsValueTwo>{`#${attributes[5].pattern}`}</ItemsValueTwo>
-              <ItemsNoValueTwo>pattern</ItemsNoValueTwo>
-            </ItemsApiDiv>
-          </ItemsInnerBox>
-        </ItemsBoxTwo>
-      </ItemsContainer>
-    </Link>
+    <ItemsContainer>
+      <ItemsBoxOne>
+        <ItemsBoxImg src={image_url}></ItemsBoxImg>
+        <ItemsSpan>ITEMS</ItemsSpan>
+        <ItemsCategoryTitle>{category}</ItemsCategoryTitle>
+      </ItemsBoxOne>
+      <ItemsSpan>ATTRIBUTES</ItemsSpan>
+      <ItemsBoxTwo>
+        <ItemsInnerBox>
+          <ItemsApiDiv>
+            <ItemsValueOne>{`#${attributes[0].style}`}</ItemsValueOne>
+            <ItemsNoValueOne>style</ItemsNoValueOne>
+          </ItemsApiDiv>
+          <ItemsApiDiv>
+            <ItemsValueOne>{`#${attributes[1].season}`}</ItemsValueOne>
+            <ItemsNoValueOne>season</ItemsNoValueOne>
+          </ItemsApiDiv>
+          <ItemsApiDiv>
+            <ItemsValueOne>{`#${attributes[2].occasion}`}</ItemsValueOne>
+            <ItemsNoValueOne>occasion</ItemsNoValueOne>
+          </ItemsApiDiv>
+        </ItemsInnerBox>
+        <ItemsInnerBox>
+          <ItemsApiDiv>
+            <ItemsValueTwo>{`#${attributes[3].fabric}`}</ItemsValueTwo>
+            <ItemsNoValueTwo>fabric</ItemsNoValueTwo>
+          </ItemsApiDiv>
+          <ItemsApiDiv>
+            <ItemsValueTwo>{`#${attributes[4].sense}`}</ItemsValueTwo>
+            <ItemsNoValueTwo>sense</ItemsNoValueTwo>
+          </ItemsApiDiv>
+          <ItemsApiDiv>
+            <ItemsValueTwo>{`#${attributes[5].pattern}`}</ItemsValueTwo>
+            <ItemsNoValueTwo>pattern</ItemsNoValueTwo>
+          </ItemsApiDiv>
+        </ItemsInnerBox>
+      </ItemsBoxTwo>
+    </ItemsContainer>
   );
 };
 const ItemsContainer = styled.div`
@@ -111,7 +99,6 @@ const ItemsBoxTwo = styled.div`
   box-sizing: border-box;
 `;
 const ItemsApiDiv = styled.div`
-  // item span 감싸줄 div
 `;
 const ItemsInnerBox = styled.div`
   // item span 감싸줄 div
@@ -128,7 +115,6 @@ const ItemsValueOne = styled.div`
   font-size: 1em;
 `;
 const ItemsNoValueOne = styled.div`
-  // item api 아닌값들어갈 div
 `;
 const ItemsValueTwo = styled.div`
   // item api 값들어갈 div
@@ -137,7 +123,6 @@ const ItemsValueTwo = styled.div`
   font-size: 1em;
 `;
 const ItemsNoValueTwo = styled.div`
-  // item api 아닌값들어갈 div
 `;
 
 export default Items;
