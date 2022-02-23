@@ -1,10 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import ItemBox from './ItemBox';
-import { useSelector, useDispatch  } from 'react-redux';
-import { addCoordinateAction } from '../actions/coordinate';
-import useInput from '../hooks/useInput';
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import ItemBox from "./ItemBox";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addCoordinateAction,
+  deleteCoordinateAction,
+} from "../actions/coordinate";
+import useInput from "../hooks/useInput";
+import { bindActionCreators } from "redux";
 import Background from '../images/fashion-unsplash.jpg'
+import shortid from "shortid";
 
 const Canvas = styled.canvas`
   width: 680px;
@@ -14,29 +19,48 @@ const Canvas = styled.canvas`
   border: 1px solid black;
 `;
 
+const Bord = styled.div`
+  position: absolute;
+  top: 0;
+  width: auto;
+  height: auto;
+  background-color: #dcdde1;
+  button {
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+`;
+
 const ItemCanvas = () => {
-  const [color, setColor] = useState('rgba(238, 75, 43, 0.2)');
-  const [data,, setData] = useInput({x:0, y:0, width:0, height:0});
+  const [color, setColor] = useState("rgba(238, 75, 43, 0.2)");
+  const [data, , setData] = useInput({});
+  const [text, setText] = useState("");
   const [startXY, setStartXY] = useState([0, 0]);
   let endXY = [0, 0];
   const [painting, setPainting] = useState(false);
   const pixelData = useSelector((state) => state.Coordinate.coordinate);
   const dispatch = useDispatch();
-
+  
   const canvasRef = useRef(null);
   let ctx = useRef(null);
-  if(canvasRef.current){
-    ctx = canvasRef.current.getContext('2d');
+  if (canvasRef.current) {
+    ctx = canvasRef.current.getContext("2d");
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
     ctx.lineWidth = 2.5;
   }
-  
+
   useEffect(() => {
-    if(painting)
-      ctx.beginPath();
-    if(!(data.width <= 30 || data.height <= 30))
+    if (!data.id) return;
+    if (painting) ctx.beginPath();
+    if (!(data.width <= 30 || data.height <= 30)){
       dispatch(addCoordinateAction(data));
+    }
+    setData({});
   }, [data, painting]);
 
   const startPainting = ({ nativeEvent }) => {
@@ -50,23 +74,27 @@ const ItemCanvas = () => {
     setPainting(false);
     endXY = [nativeEvent.offsetX, nativeEvent.offsetY];
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.closePath();
     setData({
       x: startXY[0] + 9 , 
       y: startXY[1] + 9 , 
       width: endXY[0] - startXY[0] - 5, 
       height: endXY[1] - startXY[1],
-    })
+      id: shortid.generate(),
+      text: 'text',
+    });
+    let confirmText = prompt();
+    return setText(confirmText);
   };
 
   const onMouseMove = ({ nativeEvent }) => {
     const x = nativeEvent.offsetX;
     const y = nativeEvent.offsetY;
+
     if (!painting) {
       return;
     } else {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-      ctx.fillRect(startXY[0], startXY[1], x-startXY[0], y-startXY[1]);
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ctx.fillRect(startXY[0], startXY[1], x - startXY[0], y - startXY[1]);
       ctx.stroke();
     }
 
@@ -81,14 +109,21 @@ const ItemCanvas = () => {
         y: startXY[1] + 9 , 
         width: x >= 672 ? 676 - startXY[0] : endXY[0] - startXY[0], 
         height: x >= 672 ? endXY[1] - startXY[1] : 760 - startXY[1],
+        id: shortid.generate(),
+        text: 'text',
       })
     }    
   };
+  const onRemove = (type) => {
+    if (type === "Toggle") {
+      dispatch(deleteCoordinateAction());
+    }
+  };
 
   return (
-    <>
+    <section>
       {pixelData.map((element, index) => 
-        <ItemBox key={index} name="watch" x={element.x} y={element.y} w={element.width} h={element.height}></ItemBox>
+        <ItemBox key={index} id={element.id} name={element.text} x={element.x} y={element.y} w={element.width} h={element.height}></ItemBox>
       )} 
       <Canvas
         ref={canvasRef}
@@ -97,9 +132,20 @@ const ItemCanvas = () => {
         onMouseMove={onMouseMove}
         onMouseDown={startPainting}
         onMouseUp={stopPainting}
-      >
-      </Canvas>
-    </>
+      ></Canvas>
+      <Bord>
+        {pixelData.map((element) => {
+          return (
+            <ul key={element.id}>
+              <li>
+                {element.text}
+                <button>x</button>
+              </li>
+            </ul>
+          );
+        })}
+      </Bord>
+    </section>
   );
 };
 
