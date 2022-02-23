@@ -21,8 +21,14 @@ const Container = styled.div`
     justify-content:left;
     flex-wrap: wrap;
 
+        @media screen and (max-width: 60rem) {
+        margin: 0 7em;
+    }
+        @media screen and (max-width: 50rem) {
+        margin: 0 1em;
+    }
         @media screen and (max-width: 40rem) {
-        margin: 0 3em;
+        margin: 0 0em;
     }
         @media screen and (max-width: 30rem) {
         margin: 0 1.4em;
@@ -36,13 +42,19 @@ const Box = styled.div`
     justify-content:left;
     flex-wrap: wrap;
 
-    @media screen and (max-width: 40rem) {
-        margin-left: 2em;
-        margin-top: 45em;
+    @media screen and (max-width: 60rem) {
+        margin-left: 23em;
     }
-    @media screen and (max-width: 30rem) {
+    @media screen and (max-width: 50rem) {
+        margin-left: 27em;
+    }
+    @media screen and (max-width: 50rem) {
+        margin-left: 27em;
+        /* margin-top: 50em; */
+    }
+    @media screen and (max-width: 40rem) {
         margin-left: 3.5em;
-        margin-top: 45em;
+        margin-top: 50em;
     }
 `;
 
