@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Items = ({ item }) => {
   const { attributes, image_url, category_names } = item;
   const category = category_names[0].slice(3).toUpperCase();
-
+  
   return (
     <ItemsContainer>
       <ItemsBoxOne>
@@ -45,6 +45,7 @@ const Items = ({ item }) => {
     </ItemsContainer>
   );
 };
+
 const ItemsContainer = styled.div`
   // 메인 아이템 스타일 코드
   width: 22em;

@@ -1,5 +1,4 @@
 import * as Constants from "../constants";
-export const SET_POST = "SET_POST";
 
 export const addCoordinateAction = (data) => {
   return {
@@ -24,7 +23,7 @@ export const deleteCoordinateAction = (id) => {
 
 export const setPost = (post) => {
   return {
-    type: SET_POST,
+    type: Constants.SET_POST,
     payload: post,
   };
 };

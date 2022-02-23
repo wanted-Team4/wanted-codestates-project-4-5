@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ItemBox from "./ItemBox";
+import useInput from "../hooks/useInput";
+import Background from "../images/fashion-unsplash.jpg";
+import shortid from "shortid";
+
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addCoordinateAction,
-  updateCoordinateAction,
   deleteCoordinateAction,
 } from "../actions/coordinate";
-import useInput from "../hooks/useInput";
-import { bindActionCreators } from "redux";
-import Background from "../images/fashion-unsplash.jpg";
-import shortid from "shortid";
 
 const Section = styled.section`
   /* display: flex;
@@ -27,12 +26,15 @@ const Canvas = styled.canvas`
   border: 1px solid black;
 `;
 
-const Bord = styled.div`
+const Board = styled.div`
   position: absolute;
   top: 0;
-  width: auto;
+  width: 130px;
   height: auto;
-  background-color: #dcdde1;
+  background-color: #fff;
+  border: 1px solid black;
+  margin: 20px 10px;
+
   button {
     margin-left: auto;
     border: none;
@@ -40,27 +42,26 @@ const Bord = styled.div`
     width: 30px;
     height: 30px;
     cursor: pointer;
+    font-weight: bolder;
   }
 `;
 
 const ItemCanvas = () => {
-  const [color, setColor] = useState("rgba(238, 75, 43, 0.2)");
   const [data, , setData] = useInput({}); // Box생성 데이터
-  const [updateText, setUpdateText] = useState(""); //update text데이터
+  // const [updateText, setUpdateText] = useState(""); //update text데이터
   const [startXY, setStartXY] = useState([0, 0]); // 그리기 시작 지점
   let endXY = [0, 0]; // 그리기 종료 지점
   const [painting, setPainting] = useState(false); // 그리기 여부 판단
   const pixelData = useSelector((state) => state.Coordinate.coordinate);
   const dispatch = useDispatch();
-  console.log(updateText, ">>");
   // canvas 도화지 선언
   const canvasRef = useRef(null);
   let ctx = useRef(null);
   // 도형그리기 펜 설정
   if (canvasRef.current) {
     ctx = canvasRef.current.getContext("2d");
-    ctx.strokeStyle = color; // 윤곽선 색
-    ctx.fillStyle = color; //  채우기 색
+    ctx.strokeStyle = "rgba(238, 75, 43, 0.2)"; // 윤곽선 색
+    ctx.fillStyle = "rgba(238, 75, 43, 0.2)"; //  채우기 색
     ctx.lineWidth = 2.5; // 선 두께
   }
 
@@ -72,7 +73,7 @@ const ItemCanvas = () => {
       dispatch(addCoordinateAction(data));
     }
     setData({});
-  }, [data, painting]);
+  }, [data, setData]);
 
   const startPainting = ({ nativeEvent }) => {
     setPainting(true);
@@ -130,11 +131,10 @@ const ItemCanvas = () => {
     dispatch(deleteCoordinateAction(id));
   };
 
-  const onUpdate = (id) => {
-    setUpdateText(prompt("이름이 무엇인가요?"));
-    // console.log(id, ">>");
-    // dispatch(updateCoordinateAction({ id, text: updateText }));
-  };
+  // const onUpdate = (id) => {
+  //   setUpdateText(prompt("이름이 무엇인가요?"));
+  //   dispatch(updateCoordinateAction({ id, text: updateText }));
+  // };
 
   return (
     <Section>
@@ -157,19 +157,19 @@ const ItemCanvas = () => {
         onMouseDown={startPainting}
         onMouseUp={stopPainting}
       ></Canvas>
-      <Bord>
+      <Board>
         <ul>
           {pixelData.map((element) => {
             return (
               <li key={element.id}>
                 {element.text}
                 <button onClick={() => onRemove(element.id)}>x</button>
-                <button onClick={() => onUpdate(element.id)}>o</button>
+                {/* <button onClick={() => onUpdate(element.id)}>o</button> */}
               </li>
             );
           })}
         </ul>
-      </Bord>
+      </Board>
     </Section>
   );
 };

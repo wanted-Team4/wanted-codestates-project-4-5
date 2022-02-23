@@ -124,7 +124,7 @@ const Question1 = () => {
       else if (!isNaN(value)) {
         //검색어와 일치하는 아이템
         const matchedResult = regionData.filter(
-          (item) => item.product_code == value
+          (item) => item.product_code === value
         );
         if (matchedResult.length === 0) {
           alert("검색 결과가 없습니다.");
@@ -177,18 +177,18 @@ const Question1 = () => {
     const requestProduct = axios.get(product);
     const requestRegion = axios.get(region);
 
-    axios.all([requestProduct, requestRegion]).then(
-      axios.spread((...responses) => {
-        const productResults = [...responses][0].data;
-        const regionResults = [...responses][1].data;
+    axios
+      .all([requestProduct, requestRegion])
+      .then(
+        axios.spread((...responses) => {
+          const productResults = [...responses][0].data;
+          const regionResults = [...responses][1].data;
 
-        setProductData(productResults);
-        setRegionData(regionResults);
-      })
-    )
-      .catch((err) =>
-        alert(`에러 ${err}`)
+          setProductData(productResults);
+          setRegionData(regionResults);
+        })
       )
+      .catch((err) => alert(`에러 ${err}`));
   }
 };
 
