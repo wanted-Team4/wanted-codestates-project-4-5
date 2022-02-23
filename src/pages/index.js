@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
     <>
-      <div>dddd</div>
+      <button onClick={() => navigate("/question1")}>Question1</button>
     </>
   );
 };

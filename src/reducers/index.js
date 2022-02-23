@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import Coordinate from "./coordinate";
+import posts from "./posts";
 
 /**
  *
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     }
   },
   Coordinate,
+  posts
 });
 
 export default rootReducer;

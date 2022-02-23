@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { setPost } from "../actions/coordinate";
+import { useNavigate } from "react-router-dom";
 
 import Nav from "../components/Nav";
 
@@ -54,12 +57,12 @@ const SearchBtn = styled.button`
 `;
 
 const Question1 = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     //image_url / product_code 검색 데이터
-    const [ regionData, setRegionData ] = useState([]);
+    const [regionData, setRegionData] = useState([]);
     //Keyword 검색 데이터
-    const [ productData, setProductData ] = useState([]);
-    //검색 결과 데이터
-    const [ searchData, setSearchData ] = useState([]);
+    const [productData, setProductData] = useState([]);
     const searchInput = useRef(null);
 
     //검색 함수
@@ -68,38 +71,40 @@ const Question1 = () => {
         const checkKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
         const isKorean = (checkKr.test(value)) ? true : false;
 
-        if(value==="") {
+        if (value === "") {
             alert("검색어를 입력해주세요.");
-            return; 
+            return;
         }
-        
-        //키워드 검색 (검색어가 한글일 경우)
-        if(isKorean) {
-            const foundResults = productData.filter((item)=> item.name.split("_")[0] === value);
-            setSearchData(foundResults);
 
-        } 
+        //키워드 검색 (검색어가 한글일 경우)
+        if (isKorean) {
+            const foundResults = productData.filter((item) => item.name.split("_")[0] === value);
+            dispatch(setPost(foundResults));
+            navigate("/search")
+        }
         else {
             //image_url 검색
-            if(value.includes("https")) {
+            if (value.includes("https")) {
                 //검색어와 일치하는 아이템
-                const matchedResult = regionData.filter((item)=> item.image_url === value);
+                const matchedResult = regionData.filter((item) => item.image_url === value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = regionData.filter((item)=> item.category_names[0] === matchedResult[0].category_names[0]);
-                setSearchData([...matchedResult, {similarResults}]);
-            } 
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
+                dispatch(setPost([...matchedResult, { similarResults }]));
+                navigate("/search")
+            }
             //product_code 검색
-            else if(!isNaN(value)) {
+            else if (!isNaN(value)) {
                 //검색어와 일치하는 아이템
-                const matchedResult = regionData.filter((item)=> item.product_code == value);
+                const matchedResult = regionData.filter((item) => item.product_code == value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = regionData.filter((item)=> item.category_names[0] === matchedResult[0].category_names[0]);
-                setSearchData([...matchedResult, {similarResults}]);
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
+                dispatch(setPost([...matchedResult, { similarResults }]));
+                navigate("/search")
             }
         }
     };
 
-    useEffect(()=> {
+    useEffect(() => {
         callData();
     }, []);
 
@@ -108,7 +113,7 @@ const Question1 = () => {
             <Nav />
 
             <SubTitle>
-                <Bold>Artificial Intelligence</Bold> <br /> 
+                <Bold>Artificial Intelligence</Bold> <br />
                 PXL <Bold>Fashion</Bold> Viewer
             </SubTitle>
 
@@ -130,14 +135,14 @@ const Question1 = () => {
         const requestRegion = axios.get(region);
 
         axios
-        .all([requestProduct, requestRegion])
-        .then(axios.spread((...responses)=> {
-            const productResults = [...responses][0].data;
-            const regionResults = [...responses][1].data;
-            
-            setProductData(productResults);
-            setRegionData(regionResults);
-        }));
+            .all([requestProduct, requestRegion])
+            .then(axios.spread((...responses) => {
+                const productResults = [...responses][0].data;
+                const regionResults = [...responses][1].data;
+
+                setProductData(productResults);
+                setRegionData(regionResults);
+            }));
     };
 };
 
