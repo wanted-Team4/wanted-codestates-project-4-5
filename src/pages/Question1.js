@@ -25,10 +25,16 @@ const Bold = styled.span`
 
 const Search = styled.div`
     display: flex;
-    width: 60vw;
-    max-width: 800px;
-    min-width: 400px;
+    width: 70vw;
+    max-width: 700px;
+    min-width: 350px;
     margin: 0 auto;
+
+    @media screen and (max-width: 400px) {
+        width: 90vw;
+        min-width: auto;
+        margin-right: 10px;
+    }
 `;
 
 const SearchBar = styled.input`
@@ -44,6 +50,10 @@ const SearchBar = styled.input`
 
     ::placeholder {
         color: #999;
+    }
+
+    @media screen and (max-width: 400px) {
+        margin-right: 10px;
     }
 `;
 
@@ -79,6 +89,10 @@ const Question1 = () => {
         //키워드 검색 (검색어가 한글일 경우)
         if (isKorean) {
             const foundResults = productData.filter((item) => item.name.split("_")[0] === value);
+            if(foundResults.length===0) {
+                alert("검색 결과가 없습니다.");
+                return;
+            }
             dispatch(setPost(foundResults));
             navigate(`/search?=keyword=${value}`)
         }
@@ -87,6 +101,10 @@ const Question1 = () => {
             if (value.includes("https")) {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.image_url === value);
+                if(matchedResult.length===0) {
+                    alert("검색 결과가 없습니다.");
+                    return;
+                }
                 //검색어와 같은 카테고리의 아이템 목록
                 const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
@@ -96,6 +114,10 @@ const Question1 = () => {
             else if (!isNaN(value)) {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.product_code == value);
+                if(matchedResult.length===0) {
+                    alert("검색 결과가 없습니다.");
+                    return;
+                }
                 //검색어와 같은 카테고리의 아이템 목록
                 const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
