@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Post from "../components/Post";
 import Nav from "../components/Nav";

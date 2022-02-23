@@ -6,8 +6,17 @@ const Items = ({ item }) => {
   const category = category_names[0].slice(3).toUpperCase()
   console.log(attributes[0].style)
 
+  const Link = styled.a`
+    text-decoration: none;
+    color: black;
+    
+    :visited{
+        color: black;
+    }
+`;
+
   return (
-    <div>
+    <Link href={image_url} target="_blank">
       <ItemsContainer>
         <ItemsBoxOne>
           <ItemsBoxImg src={image_url}></ItemsBoxImg>
@@ -38,7 +47,7 @@ const Items = ({ item }) => {
           </ItemsNoApiDiv>
         </ItemsBoxTwo>
       </ItemsContainer>
-    </div>
+    </Link>
   );
 };
 const ItemsContainer = styled.div`
