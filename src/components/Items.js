@@ -56,10 +56,14 @@ const ItemsContainer = styled.div`
   box-shadow: 5px 5px 7px 0px rgba(217, 217, 217, 1);
 
   @media screen and (max-width: 35rem) {
-    margin: 0 4em;
+    margin: 0 1em;
+    width: 19.5em;
+    height: 43em;
   }
   @media screen and (max-width: 30rem) {
     margin: 0;
+    width: 19.5em;
+    height: 43em;
   }
 `;
 const ItemsBoxOne = styled.div`
@@ -73,6 +77,9 @@ const ItemsBoxImg = styled.img`
   //items img 코드
   width: 100%;
   height: 24em;
+      @media screen and (max-width: 35rem) {
+      width: 100%;
+  }
 `;
 const ItemsSpan = styled.div`
   // items span 코드
