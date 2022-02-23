@@ -25,10 +25,16 @@ const Bold = styled.span`
 
 const Search = styled.div`
     display: flex;
-    width: 60vw;
-    max-width: 800px;
-    min-width: 400px;
+    width: 70vw;
+    max-width: 700px;
+    min-width: 350px;
     margin: 0 auto;
+
+    @media screen and (max-width: 400px) {
+        width: 90vw;
+        min-width: auto;
+        margin-right: 10px;
+    }
 `;
 
 const SearchBar = styled.input`
@@ -44,6 +50,10 @@ const SearchBar = styled.input`
 
     ::placeholder {
         color: #999;
+    }
+
+    @media screen and (max-width: 400px) {
+        margin-right: 10px;
     }
 `;
 
