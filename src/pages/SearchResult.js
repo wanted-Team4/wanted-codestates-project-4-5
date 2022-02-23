@@ -3,6 +3,7 @@ import Post from "../components/Post";
 import Nav from "../components/Nav";
 import Items from "../components/Items";
 import { useSelector } from 'react-redux';
+import { useState } from "react";
 
 const MainContainer = styled.div`
     margin: 0 3em;
@@ -32,9 +33,12 @@ const SearchResult = () => {
     const posts = useSelector((state) => state.posts);
     const item = posts[0]
     const post = posts[1].similarResults
+    
+    const [ isLoading, setIsLoading ] = useState(true);
 
     return (
         <>
+            {isLoading && <p>로딩중!!!!</p>}
             <Nav />
             {posts[0].name ? (
                 <MainContainer>
@@ -53,9 +57,9 @@ const SearchResult = () => {
                             <Post
                                 key={post.product_code}
                                 post={post}
+                                setLoading={setIsLoading}
                             />
                         ))}
-
                     </Box>
                 </Container>
             )}

@@ -41,15 +41,16 @@ const Link = styled.a`
     }
 `;
 
-const Post = ({ post }) => {
+const Post = ({ post, setLoading }) => {
     const { image_url, name, price } = post
+
 
     const number = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
     return (
         <MainContainer>
             <Link href={image_url} target="_blank">
-                <ProductImage src={image_url} alt="제품 이미지" />
+                <ProductImage src={image_url} alt="제품 이미지" onLoad={()=> setLoading(false)} />
                 <ProductName>{name}</ProductName>
                 <ProductPrice>{`₩ ${number}`}</ProductPrice>
             </Link>
