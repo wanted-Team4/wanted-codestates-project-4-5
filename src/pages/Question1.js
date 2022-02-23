@@ -124,7 +124,7 @@ const Question1 = () => {
       else if (!isNaN(value)) {
         //검색어와 일치하는 아이템
         const matchedResult = regionData.filter(
-          (item) => item.product_code === value
+          (item) => item.product_code == value
         );
         if (matchedResult.length === 0) {
           alert("검색 결과가 없습니다.");
