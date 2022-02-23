@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import Coordinate from "./coordinate";
 import posts from "./posts";
@@ -19,4 +21,10 @@ const rootReducer = combineReducers({
   posts,
 });
 
-export default rootReducer;
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["posts"]
+};
+
+export default persistReducer(persistConfig, rootReducer);
