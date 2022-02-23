@@ -88,7 +88,7 @@ const Question1 = () => {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.image_url === value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2] );
                 dispatch(setPost([...matchedResult, { similarResults }]));
                 navigate("/search")
             }
@@ -97,7 +97,7 @@ const Question1 = () => {
                 //검색어와 일치하는 아이템
                 const matchedResult = regionData.filter((item) => item.product_code == value);
                 //검색어와 같은 카테고리의 아이템 목록
-                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
+                const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0] && item.category_names[1] === matchedResult[0].category_names[1] && item.category_names[2] === matchedResult[0].category_names[2] );
                 dispatch(setPost([...matchedResult, { similarResults }]));
                 navigate("/search")
             }
