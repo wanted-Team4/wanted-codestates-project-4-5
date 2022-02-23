@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { setPost } from "../actions/coordinate";
+import { useNavigate } from "react-router-dom";
 
 import Nav from "../components/Nav";
 
@@ -56,6 +57,7 @@ const SearchBtn = styled.button`
 `;
 
 const Question1 = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     //image_url / product_code 검색 데이터
     const [regionData, setRegionData] = useState([]);
@@ -78,6 +80,7 @@ const Question1 = () => {
         if (isKorean) {
             const foundResults = productData.filter((item) => item.name.split("_")[0] === value);
             dispatch(setPost(foundResults));
+            navigate("/search")
         }
         else {
             //image_url 검색
@@ -87,6 +90,7 @@ const Question1 = () => {
                 //검색어와 같은 카테고리의 아이템 목록
                 const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
+                navigate("/search")
             }
             //product_code 검색
             else if (!isNaN(value)) {
@@ -95,11 +99,10 @@ const Question1 = () => {
                 //검색어와 같은 카테고리의 아이템 목록
                 const similarResults = productData.filter((item) => item.category_names[0] === matchedResult[0].category_names[0]);
                 dispatch(setPost([...matchedResult, { similarResults }]));
+                navigate("/search")
             }
         }
     };
-
-    console.log(setPost)
 
     useEffect(() => {
         callData();

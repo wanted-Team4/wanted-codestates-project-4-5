@@ -13,6 +13,14 @@ const MainContainer = styled.div`
     flex-wrap: wrap;
 `;
 
+const Container = styled.div`
+    margin: 0 3em;
+    width:100%;
+    display:flex;
+    justify-content:left;
+    flex-wrap: wrap;
+`;
+
 const SearchResult = () => {
     const posts = useSelector((state) => state.posts);
     const item = posts[0]
@@ -32,7 +40,7 @@ const SearchResult = () => {
                     ))}
                 </MainContainer>
             ) : (
-                <MainContainer>
+                <Container>
                     <Items item={item} />
                     {post.map((post) => (
                         <Post
@@ -40,7 +48,7 @@ const SearchResult = () => {
                             post={post}
                         />
                     ))}
-                </MainContainer>
+                </Container>
             )}
         </>
     );

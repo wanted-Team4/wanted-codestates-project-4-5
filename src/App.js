@@ -18,10 +18,10 @@ const App = () => {
       <Provider store={store}>
         <MainContainer>
           <Routes>
-            <Route exact path="/" element={<SearchResult />} />
-            {/* <Route exact path="/" element={<Index />} /> */}
-            {/* <Route exact path="/" element={<Question1 />} /> */}
+            <Route exact path="/" element={<Index />} />
+            <Route exact path="/question1" element={<Question1 />} />
             <Route exact path="/question2" element={<Question2 />} />
+            <Route exact path="/search" element={<SearchResult />} />
           </Routes>
         </MainContainer>
       </Provider>
