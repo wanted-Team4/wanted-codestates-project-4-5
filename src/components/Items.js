@@ -47,11 +47,12 @@ const Items = ({ item }) => {
 };
 const ItemsContainer = styled.div`
   // 메인 아이템 스타일 코드
-  width: 19em;
-  height: 44em;
+  width: 22em;
+  height: 49em;
   margin-right: 2em;
   margin-top: 0.5em;
   position: absolute;
+  left: 1.5em;
   box-shadow: 5px 5px 7px 0px rgba(217, 217, 217, 1);
 
   @media screen and (max-width: 35rem) {
@@ -82,7 +83,7 @@ const ItemsSpan = styled.div`
 const ItemsCategoryTitle = styled.div`
   // items 카테고리 네임
   width: 5em;
-  height: 1em;
+  height: 1.5em;
   margin-left: 0.5em;
   color: white;
   text-align: center;
@@ -91,10 +92,10 @@ const ItemsCategoryTitle = styled.div`
   font-size: 0.9em;
 `;
 const ItemsBoxTwo = styled.div`
-  // items 1번쨰 박스 코드
+  // items 2번쨰 박스 코드
   margin: 0;
   width: 13em;
-  height: 10em;
+  height: 18em;
   padding: 0.5em;
   box-sizing: border-box;
 `;
