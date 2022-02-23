@@ -18,6 +18,13 @@ const Container = styled.div`
     display:flex;
     justify-content:left;
     flex-wrap: wrap;
+
+        @media screen and (max-width: 40rem) {
+        margin: 0 3em;
+    }
+        @media screen and (max-width: 30rem) {
+        margin: 0 1.4em;
+    }
 `;
 
 const Box = styled.div`
@@ -26,6 +33,15 @@ const Box = styled.div`
     display:flex;
     justify-content:left;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 40rem) {
+        margin-left: 2em;
+        margin-top: 45em;
+    }
+    @media screen and (max-width: 30rem) {
+        margin-left: 3.5em;
+        margin-top: 45em;
+    }
 `;
 
 const SearchResult = () => {
