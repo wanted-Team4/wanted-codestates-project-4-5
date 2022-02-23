@@ -4,7 +4,6 @@ import styled from "styled-components";
 const Items = ({ item }) => {
   const { attributes, image_url, category_names } = item
   const category = category_names[0].slice(3).toUpperCase()
-  console.log(attributes[0].style)
 
   const Link = styled.a`
     text-decoration: none;
@@ -60,24 +59,31 @@ const Items = ({ item }) => {
 };
 const ItemsContainer = styled.div`
   // 메인 아이템 스타일 코드
-  width: 18vw;
-  height: 46vw;
+  width: 19em;
+  height: 44em;
   margin-right: 2em;
   margin-top: 0.5em;
   position: absolute;
   box-shadow: 5px 5px 7px 0px rgba(217, 217, 217, 1);
+
+    @media screen and (max-width: 35rem) {
+        margin: 0 4em;
+    }
+    @media screen and (max-width: 30rem) {
+        margin: 0;
+    }
 `;
 const ItemsBoxOne = styled.div`
   // items 1번쨰 박스 코드
   position: relative;
   border-bottom: 1px gray solid;
   width: 100%;
-  height: 30.5vw;
+  height: 29em;
 `;
 const ItemsBoxImg = styled.img`
   //items img 코드
   width: 100%;
-  height: 25vw;
+  height: 24em;
 `;
 const ItemsSpan = styled.div`
   // items span 코드
@@ -88,7 +94,7 @@ const ItemsSpan = styled.div`
 const ItemsCategoryTitle = styled.div`
   // items 카테고리 네임
   width: 5em;
-  height: 20px;
+  height: 1em;
   margin-left: 0.5em;
   color: white;
   text-align: center;
@@ -99,9 +105,9 @@ const ItemsCategoryTitle = styled.div`
 const ItemsBoxTwo = styled.div`
   // items 1번쨰 박스 코드
   margin: 0;
-  width: 18vw;
-  height: 12vw;
-  padding: 1em;
+  width: 13em;
+  height: 10em;
+  padding: 0.5em;
   box-sizing: border-box;
 `;
 const ItemsApiDiv = styled.div`
@@ -111,14 +117,15 @@ const ItemsInnerBox = styled.div`
   // item span 감싸줄 div
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5em;
+  margin-bottom: 0.5em;
+  flex-wrap: wrap;
 `;
 const ItemsValueOne = styled.div`
   // item api 값들어갈 div
   color: #d070fb;
   display: flex;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1em;
 `;
 const ItemsNoValueOne = styled.div`
   // item api 아닌값들어갈 div
@@ -127,7 +134,7 @@ const ItemsValueTwo = styled.div`
   // item api 값들어갈 div
   color: #d070fb;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1em;
 `;
 const ItemsNoValueTwo = styled.div`
   // item api 아닌값들어갈 div
