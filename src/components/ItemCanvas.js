@@ -11,6 +11,13 @@ import { bindActionCreators } from "redux";
 import Background from "../images/fashion-unsplash.jpg";
 import shortid from "shortid";
 
+const Section = styled.section`
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; */
+`;
+
 const Canvas = styled.canvas`
   width: 680px;
   height: 760px;
@@ -38,7 +45,6 @@ const Bord = styled.div`
 const ItemCanvas = () => {
   const [color, setColor] = useState("rgba(238, 75, 43, 0.2)");
   const [data, , setData] = useInput({}); // Box생성 데이터
-  const [text, setText] = useState("");
   const [startXY, setStartXY] = useState([0, 0]); // 그리기 시작 지점
   let endXY = [0, 0]; // 그리기 종료 지점
   const [painting, setPainting] = useState(false); // 그리기 여부 판단
@@ -77,16 +83,16 @@ const ItemCanvas = () => {
     setPainting(false);
     endXY = [nativeEvent.offsetX, nativeEvent.offsetY];
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    let confirmText = prompt("영역의 이름은 무엇인가요?");
+
     setData({
       x: startXY[0] + 9,
       y: startXY[1] + 9,
       width: endXY[0] - startXY[0] - 5,
       height: endXY[1] - startXY[1],
       id: shortid.generate(),
-      text: "text",
+      text: confirmText,
     });
-    let confirmText = prompt();
-    return setText(confirmText);
   };
 
   const onMouseMove = ({ nativeEvent }) => {
@@ -107,13 +113,14 @@ const ItemCanvas = () => {
       endXY = [nativeEvent.offsetX, nativeEvent.offsetY];
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       ctx.closePath();
+      let confirmText = prompt("영역의 이름은 무엇인가요?");
       setData({
         x: startXY[0] + 9,
         y: startXY[1] + 9,
         width: x >= 672 ? 676 - startXY[0] : endXY[0] - startXY[0],
         height: x >= 672 ? endXY[1] - startXY[1] : 760 - startXY[1],
         id: shortid.generate(),
-        text: "text",
+        text: confirmText,
       });
     }
   };
@@ -124,7 +131,7 @@ const ItemCanvas = () => {
   };
 
   return (
-    <section>
+    <Section>
       {pixelData.map((element, index) => (
         <ItemBox
           key={index}
@@ -156,7 +163,7 @@ const ItemCanvas = () => {
           );
         })}
       </Bord>
-    </section>
+    </Section>
   );
 };
 
