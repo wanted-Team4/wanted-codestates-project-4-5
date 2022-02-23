@@ -2,9 +2,9 @@ import styled from "styled-components";
 import Post from "../components/Post";
 import Nav from "../components/Nav";
 import Items from "../components/Items";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+import { useState } from "react";
 import Loading from "../components/Loading";
-import { useEffect, useState } from "react";
 
 const MainContainer = styled.div`
   margin: 0 3em;
@@ -47,35 +47,41 @@ const Box = styled.div`
 `;
 
 const SearchResult = () => {
-  const posts = useSelector((state) => state.posts);
-  const item = posts[0];
-  const post = posts[1].similarResults;
-  const [lodingAni, setLodingAni] = useState(false);
-  useEffect(() => {
-    setLodingAni(true);
-  }, posts);
+    const posts = useSelector((state) => state.posts);
+    const item = posts[0];
+    const post = posts[1].similarResults;
+    
+    const [ isLoading, setIsLoading ] = useState(true);
 
   return (
     <>
       {lodingAni === true ? (
         <>
-          <Nav />
-          {posts[0].name ? (
-            <MainContainer>
-              {posts.map((post) => (
-                <Post key={post.product_code} post={post} />
-              ))}
-            </MainContainer>
-          ) : (
-            <Container>
-              <Items item={item} />
-              <Box>
-                {post.map((post) => (
-                  <Post key={post.product_code} post={post} />
-                ))}
-              </Box>
-            </Container>
-          )}
+            {isLoading && <p>로딩중!!!!</p>}
+            <Nav />
+            {posts[0].name ? (
+                <MainContainer>
+                    {posts.map((post) => (
+                        <Post
+                            key={post.product_code}
+                            post={post}
+                        />
+                    ))}
+                </MainContainer>
+            ) : (
+                <Container>
+                    <Items item={item} />
+                    <Box>
+                        {post.map((post) => (
+                            <Post
+                                key={post.product_code}
+                                post={post}
+                                setLoading={setIsLoading}
+                            />
+                        ))}
+                    </Box>
+                </Container>
+            )}
         </>
       ) : (
         <Loading />
