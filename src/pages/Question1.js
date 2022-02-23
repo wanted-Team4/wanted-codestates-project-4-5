@@ -182,7 +182,10 @@ const Question1 = () => {
         setProductData(productResults);
         setRegionData(regionResults);
       })
-    );
+    )
+      .catch((err) =>
+        alert(`에러 ${err}`)
+      )
   }
 };
 

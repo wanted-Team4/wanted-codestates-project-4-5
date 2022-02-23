@@ -98,8 +98,7 @@ const ItemsBoxTwo = styled.div`
   padding: 0.5em;
   box-sizing: border-box;
 `;
-const ItemsApiDiv = styled.div`
-`;
+const ItemsApiDiv = styled.div``;
 const ItemsInnerBox = styled.div`
   // item span 감싸줄 div
   display: flex;
@@ -114,15 +113,13 @@ const ItemsValueOne = styled.div`
   font-weight: bold;
   font-size: 1em;
 `;
-const ItemsNoValueOne = styled.div`
-`;
+const ItemsNoValueOne = styled.div``;
 const ItemsValueTwo = styled.div`
   // item api 값들어갈 div
   color: #d070fb;
   font-weight: bold;
   font-size: 1em;
 `;
-const ItemsNoValueTwo = styled.div`
-`;
+const ItemsNoValueTwo = styled.div``;
 
 export default Items;
