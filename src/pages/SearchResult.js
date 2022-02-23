@@ -63,6 +63,7 @@ const SearchResult = () => {
                         <Post
                             key={post.product_code}
                             post={post}
+                            setLoading={setIsLoading}
                         />
                     ))}
                 </MainContainer>
