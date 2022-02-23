@@ -14,9 +14,7 @@ const reducer = (state = coordinateDummy, action) => {
       };
     case Constants.DELETE_COORDINATE:
       return {
-        coordinate: [
-          ...state.coordinate.filter((state) => state.id !== action.id),
-        ],
+        coordinate: state.coordinate.filter((state) => state.id !== action.id),
       };
     default:
       return state;

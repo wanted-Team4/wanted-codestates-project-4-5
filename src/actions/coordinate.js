@@ -15,10 +15,10 @@ export const updateCoordinateAction = (data) => {
   };
 };
 
-export const deleteCoordinateAction = (data) => {
+export const deleteCoordinateAction = (id) => {
   return {
     type: Constants.DELETE_COORDINATE,
-    data,
+    id,
   };
 };
 
