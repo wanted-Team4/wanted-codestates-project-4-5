@@ -118,7 +118,12 @@ const Question1 = () => {
             </SubTitle>
 
             <Search>
-                <SearchBar type="text" placeholder="IMAGE URL or KEYWORD" ref={searchInput} />
+                <SearchBar 
+                    type="text" 
+                    placeholder="IMAGE URL or KEYWORD" 
+                    ref={searchInput} 
+                    onKeyPress={(e)=> (e.key==="Enter") && search()} 
+                />
                 <SearchBtn
                     onClick={search}
                 >검색</SearchBtn>
