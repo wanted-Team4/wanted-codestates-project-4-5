@@ -9,8 +9,6 @@ import SearchResult from "./pages/SearchResult";
 import store from "./store/configure";
 import { Provider } from "react-redux";
 
-
-
 const App = () => {
   return (
     <BrowserRouter>
@@ -28,7 +26,5 @@ const App = () => {
     </BrowserRouter>
   );
 };
-const MainContainer = styled.main`
-
-`;
+const MainContainer = styled.main``;
 export default App;

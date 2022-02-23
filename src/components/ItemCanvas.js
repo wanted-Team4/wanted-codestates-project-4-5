@@ -8,13 +8,20 @@ import {
 } from "../actions/coordinate";
 import useInput from "../hooks/useInput";
 import { bindActionCreators } from "redux";
-import Background from '../images/fashion-unsplash.jpg'
+import Background from "../images/fashion-unsplash.jpg";
+import shortid from "shortid";
 
+const Section = styled.section`
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; */
+`;
 
 const Canvas = styled.canvas`
   width: 680px;
   height: 760px;
-  background-size: 680px 760px; 
+  background-size: 680px 760px;
   background-image: url(${Background});
   border: 1px solid black;
 `;
@@ -37,28 +44,32 @@ const Bord = styled.div`
 
 const ItemCanvas = () => {
   const [color, setColor] = useState("rgba(238, 75, 43, 0.2)");
-  const [data, , setData] = useInput({ x: 0, y: 0, width: 0, height: 0 });
-  const [text, setText] = useState("");
-  const [startXY, setStartXY] = useState([0, 0]);
-  let endXY = [0, 0];
-  const [painting, setPainting] = useState(false);
+  const [data, , setData] = useInput({}); // Box생성 데이터
+  const [startXY, setStartXY] = useState([0, 0]); // 그리기 시작 지점
+  let endXY = [0, 0]; // 그리기 종료 지점
+  const [painting, setPainting] = useState(false); // 그리기 여부 판단
   const pixelData = useSelector((state) => state.Coordinate.coordinate);
   const dispatch = useDispatch();
 
+  // canvas 도화지 선언
   const canvasRef = useRef(null);
   let ctx = useRef(null);
+  // 도형그리기 펜 설정
   if (canvasRef.current) {
     ctx = canvasRef.current.getContext("2d");
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
-    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = color; // 윤곽선 색
+    ctx.fillStyle = color; //  채우기 색
+    ctx.lineWidth = 2.5; // 선 두께
   }
-  
+
   useEffect(() => {
-    if (painting) ctx.beginPath();
-    if (!(data.width <= 30 || data.height <= 30))
+    if (!data.id) return;
+    if (painting) ctx.beginPath(); // 그리기 시작지점 초기화
+    // 박스가 특정크기 이상이면 생성
+    if (!(data.width <= 30 || data.height <= 30)) {
       dispatch(addCoordinateAction(data));
-    setText(text);
+    }
+    setData({});
   }, [data, painting]);
 
   const startPainting = ({ nativeEvent }) => {
@@ -67,20 +78,21 @@ const ItemCanvas = () => {
   };
 
   const stopPainting = ({ nativeEvent }) => {
-    if(!painting) return;
+    if (!painting) return;
 
     setPainting(false);
     endXY = [nativeEvent.offsetX, nativeEvent.offsetY];
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.closePath();
+    let confirmText = prompt("영역의 이름은 무엇인가요?");
+
     setData({
-      x: startXY[0] + 9 , 
-      y: startXY[1] + 9 , 
-      width: endXY[0] - startXY[0] - 5, 
+      x: startXY[0] + 9,
+      y: startXY[1] + 9,
+      width: endXY[0] - startXY[0] - 5,
       height: endXY[1] - startXY[1],
+      id: shortid.generate(),
+      text: confirmText,
     });
-    let confirmText = prompt();
-    return setText(confirmText);
   };
 
   const onMouseMove = ({ nativeEvent }) => {
@@ -101,13 +113,16 @@ const ItemCanvas = () => {
       endXY = [nativeEvent.offsetX, nativeEvent.offsetY];
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       ctx.closePath();
+      let confirmText = prompt("영역의 이름은 무엇인가요?");
       setData({
-        x: startXY[0] + 9, 
-        y: startXY[1] + 9 , 
-        width: x >= 672 ? 676 - startXY[0] : endXY[0] - startXY[0], 
+        x: startXY[0] + 9,
+        y: startXY[1] + 9,
+        width: x >= 672 ? 676 - startXY[0] : endXY[0] - startXY[0],
         height: x >= 672 ? endXY[1] - startXY[1] : 760 - startXY[1],
-      })
-    }    
+        id: shortid.generate(),
+        text: confirmText,
+      });
+    }
   };
   const onRemove = (type) => {
     if (type === "Toggle") {
@@ -116,10 +131,18 @@ const ItemCanvas = () => {
   };
 
   return (
-    <section>
-      {pixelData.map((element, index) => 
-        <ItemBox key={index} name="watch" x={element.x} y={element.y} w={element.width} h={element.height}></ItemBox>
-      )} 
+    <Section>
+      {pixelData.map((element, index) => (
+        <ItemBox
+          key={index}
+          id={element.id}
+          name={element.text}
+          x={element.x}
+          y={element.y}
+          w={element.width}
+          h={element.height}
+        ></ItemBox>
+      ))}
       <Canvas
         ref={canvasRef}
         width={680}
@@ -140,18 +163,7 @@ const ItemCanvas = () => {
           );
         })}
       </Bord>
-      {pixelData.map((element, index) => (
-        <ItemBox
-          key={index}
-          name={element.text}
-          x={element.x}
-          y={element.y}
-          w={element.width}
-          h={element.height}
-          onRemove={onRemove}
-        ></ItemBox>
-      ))}
-    </section>
+    </Section>
   );
 };
 
