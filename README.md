@@ -5,7 +5,7 @@
 ## 🧥 View & Deploy
 
 
-|   Question 1    | Question 1 | 
+|   Question 1    | Question 2 | 
 | :--------: | :------------: | 
 |![Q1_view](https://user-images.githubusercontent.com/48751435/155338509-55fd744b-04c9-4ecf-a0ff-14f286b11828.gif) | ![Q2_view](https://user-images.githubusercontent.com/48751435/155338591-fd08a992-2c78-4f78-94db-074c1a2d1b49.gif)|
 
