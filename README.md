@@ -1,20 +1,32 @@
 # 🧥 wanted-codestates-project-4-5
 
-</br>
+데이터 뷰어, 이미지 드래그를 구현한 프로젝트입니다.
 
-## 🧥 View & Deploy
+### 📌 &nbsp;[Team4의 과제 확인하러 가기](https://competent-mcnulty-34dc65.netlify.app/)
 
+### <br/>
+
+###
+
+## 🧥 View
 
 |   Question 1    | Question 2 | 
 | :--------: | :------------: | 
 |![Q1_view](https://user-images.githubusercontent.com/48751435/155338509-55fd744b-04c9-4ecf-a0ff-14f286b11828.gif) | ![Q2_view](https://user-images.githubusercontent.com/48751435/155338591-fd08a992-2c78-4f78-94db-074c1a2d1b49.gif)|
 
+### <br/>
 
-[👉🏻 Team4의 과제 바로가기](https://competent-mcnulty-34dc65.netlify.app/)
-
-</br>
+###
 
 ## 🧥 Implement
+
+### Stack
+
+`Javascript` `React` `Redux` `Styled-Components`
+
+### <br/>
+
+### Features
 
 #### ✅ Question 1
 
@@ -28,7 +40,6 @@
 - [X] 로딩된 데이터는 메모리 캐시.
 - [X] 에러 처리
 
-</br>
 
 #### ✅ Question 2 
 
@@ -39,29 +50,63 @@
 - [X] 지정한 영역 삭제
 - [X] 겹치는 영역 구현
 
-</br>
+### <br/>
+
+###
+
+## 🧥 Directory
+
+```
+├── public/
+├── src/
+│   ├── actions/                      - redux action 설정
+│   ├── components/                   - page components
+│   ├── constants/                    - exporting action type
+│   ├── hooks/                        - custom hook(toggle, input)
+│   ├── images/                       - img 파일
+│   ├── reducers/                     - redux 설정
+│   ├── store/                        - redux 연결
+│   └── pages/                        - routed pages
+│
+├── App.js                            - page routing
+├── index.js                          - entry point
+├── README.md                         - 리드미(프리뷰, 배포링크, 코드컨벤션)
+└── package.json                      - 사용 package 목록
+```
+
+### <br/>
+
+###
 
 ## 🧥 Code Convention
 
 ### Getting Started
 
-1️⃣ 패키지 설치
+1. `clone` the repository,
+
+```
+$ git clone "https://github.com/wanted-Team4/wanted-codestates-project-4-5.git"
+```
+
+2. `Install` dependencies,
 
 ```
 $ npm install
 ```
 
-2️⃣ VScode prettier
+3. `Setting` prettier,
 
 ```
 $ npx prettier --write .
 ```
 
-3️⃣ 실행
+4. `start` the project,
 
 ```
 $ npm start
 ```
+
+### <br/>
 
 ### Commit Emoji
 
