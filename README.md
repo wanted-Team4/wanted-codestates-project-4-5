@@ -24,8 +24,6 @@
 
 `Javascript` `React` `Redux` `Styled-Components`
 
-### <br/>
-
 ### Features
 
 #### ✅ Question 1
@@ -105,8 +103,6 @@ $ npx prettier --write .
 ```
 $ npm start
 ```
-
-### <br/>
 
 ### Commit Emoji
 
