@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Items = ({ item }) => {
   const { attributes, image_url, category_names } = item;
   const category = category_names[0].slice(3).toUpperCase();
-  
+
   return (
     <ItemsContainer>
       <ItemsBoxOne>
@@ -78,8 +78,8 @@ const ItemsBoxImg = styled.img`
   //items img 코드
   width: 100%;
   height: 24em;
-      @media screen and (max-width: 35rem) {
-      width: 100%;
+  @media screen and (max-width: 35rem) {
+    width: 100%;
   }
 `;
 const ItemsSpan = styled.div`
